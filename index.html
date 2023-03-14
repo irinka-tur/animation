@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>promo-project for animation</title>
+        <meta name="description" content="отдых на гавайских островах">
+        <meta name="autor" content="me">
+        <link rel="stylesheet" href="styles/reset.css">
+        <link rel="stylesheet" href="styles/styles.css">
+        <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+        <script src="animation/hawaii2.js"></script>
+        <!--<script src="gif files/onload.js"></script>-->
+        <script>
+            var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+            function init() {
+                canvas = document.getElementById("canvas");
+                anim_container = document.getElementById("animation_container");
+                dom_overlay_container = document.getElementById("dom_overlay_container");
+                var comp=AdobeAn.getComposition("2155E6BD25272C4E9286646CC8C18573");
+                var lib=comp.getLibrary();
+                var loader = new createjs.LoadQueue(false);
+                loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+                loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+                var lib=comp.getLibrary();
+                loader.loadManifest(lib.properties.manifest);
+            }
+            function handleFileLoad(evt, comp) {
+                var images=comp.getImages();	
+                if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+            }
+            function handleComplete(evt,comp) {
+               
+                var lib=comp.getLibrary();
+                var ss=comp.getSpriteSheet();
+                var queue = evt.target;
+                var ssMetadata = lib.ssMetadata;
+                for(i=0; i<ssMetadata.length; i++) {
+                    ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+                }
+                exportRoot = new lib.гаваи2();
+                stage = new lib.Stage(canvas);	
+           
+                fnStartAnimation = function() {
+                    stage.addChild(exportRoot);
+                    createjs.Ticker.setFPS(lib.properties.fps);
+                    createjs.Ticker.addEventListener("tick", stage);
+                }	    
+              
+                AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+                AdobeAn.compositionLoaded(lib.properties.id);
+                fnStartAnimation();
+            }
+            </script> 
+        </head>
+    <body>
+        <!--<div class="preloader">
+            <div class="preloader__image"></div>
+        </div> -->
+    <header>
+        <section class="panel">
+            <img class="girl" src="gif files/girl2.gif"/>
+        </section>      
+        <div class="main_picture" onclick="init();" title="click on me">
+            <div id="animation_container">
+                <canvas id="canvas" width="1024" height="768"></canvas>
+                <div id="dom_overlay_container"></div>
+            </div>
+        </div>
+        <aside>
+            <section>
+                 <audio src="mp3/Aloha, E Komo Mai.mp3" loop></audio>
+                    <img id ="music" src="gif files/button3.gif"/>
+            </section>
+            <script src="mp3/play.js"></script> 
+            <section>
+                <a href="#" target="_blank">
+                    <img class="href" src="gif files/fly3.gif"/>
+                </a>
+            </section>
+            <section>
+                <a href="slider/index.html" target="_blank">
+                    <img class="gallery" src="gif files/gallery3.gif"/>
+                </a>
+            </section>
+        </aside>
+    </header>
+    <div class="info">
+        <div class="box">
+            <div class="sea">
+                <h4>Исследуя море</h4>
+                    <p>Гавайи – вершина подводного хребта, вокруг много морских гор, не выступающих на поверхность,
+                        – именно поэтому условия для дайвинга на островах просто идеальные. В кратере Молокини можно 
+                        поплавать с маской. Легендарный сёрфинг, родиной которого по праву считают Гавайские острова,
+                         долгое время был реальным средством передвижения и частью общественных ритуалов. Позднее он 
+                         превратился в экстремальное развлечение, которым в начале ХХ века рискнули заняться и гости 
+                         островов. На каждом приличном пляже можно найти инструктора и арендовать оборудование. Для
+                          начинающих оптимальны волны в районе Вайкики. Если смелости на самостоятельный заплыв
+                           недостаточно, можно поучаствовать в морской прогулке на каноэ в качестве пассажира. 
+                           Кроме серфинга, на Гавайских островах процветает катание на лошадях, альпинизм, пеший туризм. </p>
+            </div>
+                <div class="one"></div>
+        </div>
+        <div class="box">
+            <div class="mountain">
+                <h4>Исследуя горы</h4>
+                    <p>Гавайские вулканы — национальный парк США на острове Гавайи. Тут можно увидеть результат тысячелетней
+                         вулканической активности, процессов миграции и эволюции, которые сформировали сушу посреди океана
+                         с уникальной экосистемой. На территории парка находятся активные вулканы Килауэа и Мауна-Лоа. 
+                         На Килауэа с 1983 г. происходит медленное, но непрерывное извержение, это один из самых активных
+                          вулканов на Земле.У аборигенов есть легенда, объясняющая, почему Килауэа такой неугомонный и подчас
+                           даже жестокий. Местные жители верят, что кратер Килауэа, Халемаумау, является домом богини огня Пеле,
+                            очень вспыльчивой особы. Девушка легко теряет над собой контроль и начинает буквально плеваться 
+                            огнем и раскаленной лавой куда попало. Потом Пеле успокаивается и погружается в благодатный сон.
+                             Чтобы ублажить столь пылкую богиню или хотя бы умерить ее яростный гнев, аборигены приносят дары
+                              для Пеле и оставляют их на краю кратера. Этот обычай свято блюдется и в наши дни.</p>
+            </div>
+                <div class="two"></div>
+        </div>
+        <div class="box">
+            <div class="history">
+                <h4>Исследуя историю</h4>
+                    <p>По наиболее достоверным источникам, предки современных гавайцев приплыли с Таити 
+                        около XII века. Таитяне совершали плавание на тысячи километров взад-вперед через
+                         океан на двухместных каноэ. Древнегавайским обществом управляли вожди, там царил
+                          матриархат, а религия следовала строгим законам, называемым капу. Таитяне вытеснили
+                           аборигенов, и жрец пришельцев назначил своего короля. Последующие века проходили 
+                           в постоянной междоусобице: острова то объединялись в союзы, то выходили из них. 
+                           О полинезийском происхождении свидетельствует этнический тип и обычаи современных 
+                           островитян.До 1893 года Гавайями благополучно правила местная королевская династия,
+                            но через 5 лет после свержения монарха оставшуюся без хозяина территорию 
+                            аннексировали США. 
+                         Правительство США неохотно поддерживало государственный переворот, но вскоре поняло, 
+                         что колонизация островов может стать важным стратегическим шагом, и Гавайи были 
+                         присоединены к территории Америки в 1898 году. Печально известная внезапная атака
+                          Перл-Харбора, произошедшая на Гавайских островах в 1941 году, вовлекла США во Вторую
+                           мировую войну. Полноценным, 50-м по счету штатом острова стали в 1959 году. С тех 
+                           пор Гавайи периодически пытаются отделиться от США, но скорее в фантазиях некоторых 
+                           политических активистов, чем всерьез.</p>
+            </div>
+                <div class="three"></div>
+        </div>
+        <div class="back">
+                  <div class="booking">
+            <form method="get" enctype="application/x-www-form-urlencoded" target="_self" action="#">
+                <label for="name">Введите ваше Имя и Фамилию </label><br>
+                <input type="text" name="name" id="name" placeholder="Введите ваше Имя и Фамилию"/><br><br>
+          <label for="island">На каком острове вы хотели бы остановиться?</label>
+                <select>
+                    <option>Гаваи или Большой остров</option>
+                    <option>Кауаи</option>
+                    <option>Кахоолаве</option>
+                    <option>Ланаи</option>
+                    <option>Мауи</option>
+                    <option>Молокаи</option>
+                    <option>Ниихау</option>
+                    <option>Оаху</option>
+                </select>
+                <label for="people">Выберите количество человек?</label>
+                <select>
+                    <option>1 человек</option>
+                     <option>2 человека</option>
+                     <option>3 человека</option>
+                     <option>4 человека</option>
+                     <option>5 и более человек</option>
+                </select>
+                 <label for="food">Условия питания которые вы предпочитаете?</label><br>
+                <input type="checkbox" value="name" id="food1"/>
+                <label for="food1">без питания</label><br>
+                <input type="checkbox" value="name" id="food2"/>
+                <label for="food2">завтрак</label><br>
+                <input type="checkbox" value="name" id="food3"/>
+                <label for="food3">обед</label><br>
+                <input type="checkbox" value="name" id="food4"/>
+                <label for="food4">ужин</label><br><br>
+                <label for="phone">Оставьте Ваш номер телефона, мы с Вами свяжемся</label><br>
+                <input type="text" name="phone" id="phone" class="phone" placeholder="Введите ваш номер телефона"/><br><br>
+                <input class="approve" type="submit" value="Отправить">
+            </form>
+                  </div>
+        </div>
+        <div class="box">
+            <div class="culture">
+                <h4>Исследуя культуру</h4>
+                    <p>Гавайцы с удовольствием участвуют в фольклорных ансамблях, танцующих популярный местный
+                        танец хула, демонстрируют высокий класс в серфинге, обучают своему искусству туристов.
+                         Множеству богов уже никто не поклоняется, но от былого политеизма сохранились красочные
+                          гавайские легенды, которые коренные жители островов с радостью расскажут гостям. 
+                          Другое популярное занятие гавайцев – исполнение народных песен в сопровождении укулеле,
+                           или миниатюрной гитары, не такое уж древнее. По сути, это переработанные столетие назад
+                            континентальные американские песни, приправленные местным колоритом.
+                        Как подобает тропическому райскому острову, на Гавайях абсолютно спокойно. 
+                        За исключением космополитичного Гонолулу рубашки в стиле алоха и сандалии (руба-слиппа)
+                         приемлемы для любого повода и события, будь то семейные сборища или же веселье и отдых 
+                         на открытом воздухе с друзьями. Забота об островах и обществе обязательны.
+                        А затем существует алоха... точнее, алоооооха! — как сказали бы на луау (местный праздник). 
+                        Это, конечно же, приветствие, но и более чем приветствие. Оно выражает воспитанность, 
+                        ежедневную практику открытости, гостеприимства и доброжелательности и распространяется на 
+                        всех, как на местных, так и на туристов.</p>
+            </div>      
+                <div class="four"></div>
+        </div>
+        <div class="box">  
+            <div class="coast">
+                <h4>Исследуя пляжи</h4>
+                    <p>Гавайи славятся на весь мир своими великолепными пляжами, которые считаются одними из лучших в мире.
+                         Действительно, на острове есть пляжи на любой вкус — с разным цветом песка, с особым морем и
+                          уникальными ландшафтами.Пляж Хапуна на Большом Острове Гавайев — один из самых красивых белых 
+                          пляжей в мире. Он входит в состав Национального парка Хапуна, достигая почти двух километров в длину.
+                           Хапуна славится своим удивительно белым песком и кристально чистым спокойным морем. Здесь просто
+                           идеальные условия для дайвинга, купания и загара на протяжение всего года. Пляж обеспечивает все 
+                           виды удобств, включая туалеты, души, столы для пикника и стоянку. На Хапуна всегда дежурит бригада 
+                           спасателей. Несомненно, это отличный пляж для релаксации, подводного плавания, волейбола и других
+                            видов спорта. Кроме широкого спектра развлечений, это также одно из лучших мест на Гавайях для 
+                            наблюдения за закатами солнца. </p>
+            </div>
+            
+                <div class="five"></div>
+        
+        </div>
+    </div>    
+    </body>
+        <footer>
+            <section class="main">
+                <ul>
+                    <li><a href="#">исследуя море</a></li>
+                    <li><a href="#">исследуя горы</a></li>
+                    <li><a href="#">исследуя историю</a></li>
+                    <li><a href="#">исследуя культуру</a></li>
+                    <li><a href="#">исследуя пляжи</a></li>
+                </ul>
+            </section>
+            <div class="social">
+            <div class="rotation">
+            <a href="https://telegram.org" title="поделиться с друзьями" target='_blank'>
+                <img src="pics/teleg.png"/></a>
+            </div>
+                <div class="rotation">
+                <a href="https://www.instagram.com" title="поделиться с друзьями" target='_blank'>
+                <img src="pics/inst.png"/></a>
+                </div>
+                     <div class="rotation">
+                    <a href="https://vk.com" title="поделиться с друзьями" target='_blank'>
+                    <img src="pics/vk.png"/></a>
+                     </div>
+                         <div class="rotation">
+                         <a href="https://twitter.com" title="поделиться с друзьями" target='_blank'>
+                         <img src="pics/twit.png"/></a>
+                         </div>
+                            <div class="rotation">
+                            <a href="https://ru-ru.facebook.com" title="поделиться с друзьями" target='_blank'>
+                            <img src="pics/facebook.png"/></a>
+                            </div>
+                                <div class="rotation">
+                                <a href="https://www.messenger.com" title="поделиться с друзьями" target='_blank'>
+                                <img src="pics/mes.png"/></a>
+                                </div>
+                                    <div class="rotation">  
+                                     <a href="https://www.viber.com/ru/" title="поделиться с друзьями" target='_blank'>
+                                    <img src="pics/viber.png"/></a>
+                                    </div>
+            </div>
+            <p id="me">IRINKA_TU;)</p> 
+        </footer>
+</html>
